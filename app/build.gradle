@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.github.rrj"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+
+            keyAlias 'ecr'
+            keyPassword '366ec.com'
+            storeFile file('D:\\ecr.jks')
+            storePassword '366ec.com'
+
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    productFlavors {
+
+        SJYG {
+
+            applicationId "com.github.sjyg"
+            manifestPlaceholders = [app_name: "四季易购", icon: "@mipmap/sjyg_icon", welcome: "@mipmap/sjyg_welcome", tint: "@color/white"]
+            resValue("string", "version", "1.0.1")
+        }
+
+        RRJ {
+
+            applicationId "com.github.rrj"
+            manifestPlaceholders = [app_name: "仁仁家", icon: "@mipmap/icon", welcome: "@mipmap/welcome", tint: "@color/home_bg"]
+            resValue("string", "version", "1.0.1")
+        }
+
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    testCompile 'junit:junit:4.12'
+
+    compile 'me.yokeyword:fragmentation:0.8.4'
+}
