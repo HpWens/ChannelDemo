@@ -3,7 +3,7 @@ package com.github.rrj.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.github.rrj.config.Constants;
+import com.github.rrj.MyApplication;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -23,6 +23,6 @@ public class FirstWebViewFragment extends SupportFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        start(WebViewFragment.newInstance(Constants.BASE_URL));
+        start(WebViewFragment.newInstance(MyApplication.loadUrl));
     }
 }

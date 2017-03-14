@@ -6,6 +6,6 @@ package com.github.rrj.config;
 
 public class Constants {
 
-    public static final String BASE_URL = "http://m.sijiegou.com/";
+    public static final String BASE_URL = "http://www.baidu.com/";
 
 }

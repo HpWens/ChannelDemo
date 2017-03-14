@@ -46,33 +46,38 @@ android {
         javaMaxHeapSize "4g"
     }
 
+    //多渠道配置
     productFlavors {
-
+        //四季易购
         SJYG {
-
             applicationId "com.github.sjyg"
-            manifestPlaceholders = [app_name: "四季易购", icon: "@mipmap/sjyg_icon", welcome: "@mipmap/sjyg_welcome", tint: "@color/white"]
-            resValue("string", "version", "1.0.1")
+            manifestPlaceholders = [app_name: "四季易购", icon: "@mipmap/sjyg_icon", welcome_bg:
+                    "@mipmap/sjyg_welcome", tint_color: "@color/white", load_url: "http://www.baidu.com/"]
+            resValue("string" , "key","123")
         }
-
+        //仁仁家
         RRJ {
-
             applicationId "com.github.rrj"
-            manifestPlaceholders = [app_name: "仁仁家", icon: "@mipmap/icon", welcome: "@mipmap/welcome", tint: "@color/home_bg"]
-            resValue("string", "version", "1.0.1")
+            manifestPlaceholders = [app_name         : "仁仁家", icon: "@mipmap/icon", welcome_bg:
+                    "@mipmap/rrj_welcome", tint_color: "@color/home_bg", load_url: "https://www.taobao.com/"]
         }
-
+        //库乐购
+        KLG {
+            applicationId "com.github.klg"
+            manifestPlaceholders = [app_name         : "库乐购", icon: "@mipmap/klg_icon", welcome_bg:
+                    "@mipmap/klg_welcome", tint_color: "@color/home_bg", load_url: "https://www.jd.com/"]
+        }
     }
 
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.1.1'
     testCompile 'junit:junit:4.12'
-
     compile 'me.yokeyword:fragmentation:0.8.4'
+    compile 'com.android.support:design:25.1.1'
 }

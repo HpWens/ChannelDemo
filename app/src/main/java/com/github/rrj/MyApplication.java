@@ -5,7 +5,10 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
+import com.github.rrj.config.Constants;
 import com.github.rrj.receiver.NetworkConnectChangedReceiver;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by boby on 2017/2/27.
@@ -24,9 +27,11 @@ public class MyApplication extends Application {
     //    表示移动网络数据是否打开
     private boolean isEnableMobile;
 
-    public static String welcomeRes = "";
+    public static int welcomeBgRes = R.mipmap.rrj_welcome;
 
     public static int tintColor = R.color.white;
+
+    public static String loadUrl = Constants.BASE_URL;
 
     private NetworkConnectChangedReceiver mReceiver;
 
@@ -38,7 +43,7 @@ public class MyApplication extends Application {
 
         startNetReceiver();
 
-        initStrategy();
+        initConfig();
     }
 
     private void startNetReceiver() {
@@ -53,16 +58,32 @@ public class MyApplication extends Application {
 
     }
 
-    private void initStrategy() {
+    private void initConfig() {
         ApplicationInfo info = null;
         try {
             info = this.getPackageManager().getApplicationInfo(getPackageName(), PackageManager
                     .GET_META_DATA);
+            int tintColor = info.metaData.getInt("tint_color");
+            String loadUrl = info.metaData.getString("load_url");
+            String welcomePath = info.metaData.getString("welcome_bg");
 
-            int tintColor = info.metaData.getInt("tint");
-            String welcomePath = info.metaData.getString("welcome");
+            Class c = R.mipmap.class;
+            Field[] fields = c.getFields();
+            for (Field field : fields) {
+                if (field.getName().equals(welcomePath.substring(welcomePath.lastIndexOf("/") + 1,
+                        welcomePath.lastIndexOf(".")))) {
+                    this.welcomeBgRes = (int) field.get(c.newInstance());
+                    break;
+                }
+            }
 
+            this.tintColor = tintColor;
+            this.loadUrl = loadUrl;
         } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
     }

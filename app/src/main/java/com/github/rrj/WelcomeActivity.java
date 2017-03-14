@@ -34,7 +34,7 @@ public class WelcomeActivity extends BaseActivity {
 
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintColor(getColor(R.color.white));
+        tintManager.setStatusBarTintColor(MyApplication.tintColor);
 
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -44,7 +44,7 @@ public class WelcomeActivity extends BaseActivity {
             }
         }, DELAY_TIME);
 
-
+        mIvBg.setBackgroundResource(MyApplication.welcomeBgRes);
     }
 
     @Override

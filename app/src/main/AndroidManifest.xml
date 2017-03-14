@@ -59,12 +59,16 @@
             android:value="${icon}"/>
 
         <meta-data
-            android:name="welcome"
-            android:value="${welcome}"/>
+            android:name="welcome_bg"
+            android:value="${welcome_bg}"/>
 
         <meta-data
-            android:name="tint"
-            android:value="${tint}"/>
+            android:name="tint_color"
+            android:value="${tint_color}"/>
+
+        <meta-data
+            android:name="load_url"
+            android:value="${load_url}"/>
 
     </application>
 
